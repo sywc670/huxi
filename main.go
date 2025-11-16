@@ -24,10 +24,11 @@ import (
 )
 
 var (
-	periodTime int
-	breakTime  int
-	randLower  int
-	randUpper  int
+	periodTime            int
+	breakTime             int
+	randLower             int
+	randUpper             int
+	enableEyeNotification bool
 )
 
 //go:embed mp3/*.mp3
@@ -38,6 +39,7 @@ func init() {
 	pflag.IntVarP(&breakTime, "break", "b", 20, "define break time.(in min)")
 	pflag.IntVarP(&randUpper, "upper", "u", 7, "define replay upper time.(in min)")
 	pflag.IntVarP(&randLower, "lower", "l", 5, "define replay lower time.(in min)")
+	pflag.BoolVarP(&enableEyeNotification, "eye", "e", true, "define if window popup or hide with sound")
 }
 
 func main() {
@@ -85,7 +87,7 @@ func main() {
 
 		// 等待周期完成
 		log.Printf("还有%d分钟", periodTime)
-		time.Sleep(time.Minute * time.Duration(periodTime))
+		<-time.Tick(time.Minute * time.Duration(periodTime))
 
 		// 结束协程
 		log.Println("发出终止信号")
@@ -101,7 +103,7 @@ func main() {
 
 		// 等待休息完成
 		log.Printf("还有%d分钟", breakTime)
-		time.Sleep(time.Minute * time.Duration(breakTime))
+		<-time.Tick(time.Minute * time.Duration(breakTime))
 		log.Println("休息完毕")
 	}
 }
@@ -164,6 +166,9 @@ func randomReplay(ctx context.Context) {
 			log.Printf("%s\n", err)
 			os.Exit(1)
 		}
+		if enableEyeNotification {
+			ShowConsole()
+		}
 
 		for range 12 {
 			select {
@@ -181,6 +186,9 @@ func randomReplay(ctx context.Context) {
 		if err != nil {
 			log.Printf("%s\n", err)
 			os.Exit(1)
+		}
+		if enableEyeNotification {
+			HideConsole()
 		}
 	}
 }
