@@ -1,4 +1,4 @@
-module github.com/sywc670/random-replay
+module github.com/sywc670/huxi
 
 go 1.23.6
 

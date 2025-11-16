@@ -7,8 +7,8 @@ NOTE: build不提供mp3文件，需要自己添加mp3文件到mp3目录: start.m
 ```sh
 make
 
-./random-replay.exe --help
-./random-replay.exe -p 90 -b 20 -l 3 -u 5
+./huxi.exe --help
+./huxi.exe -p 90 -b 20 -l 3 -u 5
 # 可以在运行后输入两个数字，以空白隔开以修改随机休息的区间
 ```
 
