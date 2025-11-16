@@ -188,7 +188,7 @@ func randomReplay(ctx context.Context) {
 			os.Exit(1)
 		}
 		if enableEyeNotification {
-			HideConsole()
+			MinimizeConsole()
 		}
 	}
 }

@@ -10,8 +10,9 @@ var (
 )
 
 const (
-	SW_HIDE = 0
-	SW_SHOW = 5
+	SW_HIDE       = 0
+	SW_SHOWNORMAL = 1
+	SW_MINIMIZE   = 6
 )
 
 func HideConsole() {
@@ -24,6 +25,13 @@ func HideConsole() {
 func ShowConsole() {
 	hwnd, _, _ := procGetConsoleWindow.Call()
 	if hwnd != 0 {
-		procShowWindow.Call(hwnd, SW_SHOW)
+		procShowWindow.Call(hwnd, SW_SHOWNORMAL)
+	}
+}
+
+func MinimizeConsole() {
+	hwnd, _, _ := procGetConsoleWindow.Call()
+	if hwnd != 0 {
+		procShowWindow.Call(hwnd, SW_MINIMIZE)
 	}
 }
