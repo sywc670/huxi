@@ -2,7 +2,7 @@
 
 默认周期90分钟，休息20分钟。
 
-NOTE: build不提供mp3文件，需要自己添加mp3文件到mp3目录: start.mp3、replay.mp3、finish.mp3
+NOTE: 添加mp3文件到mp3目录: start.mp3、replay.mp3、finish.mp3
 
 ```sh
 make
